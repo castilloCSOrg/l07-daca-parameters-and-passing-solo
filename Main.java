@@ -1,10 +1,28 @@
 // YOUR NAME: Valentine Diaz   
 // COLLABORATORS: 
 // DATE: 10/01/2024
-
+          
 public class Main
 {
-        
+     static String ASCII_ART_0 = "    .----.    .----.  ",
+                ASCII_ART_1 = "   (  --  \\  /  --  )",
+                ASCII_ART_2 = "          |  |        ",
+                ASCII_ART_3 = "         _/  \\_      ",
+                ASCII_ART_4 = "        (_    _)      ",
+                ASCII_ART_5 = "     ,    `--`    ,   ",
+                ASCII_ART_6 = "     \\'-.______.-'/  ",
+                ASCII_ART_7 = "      \\          /   ",
+                ASCII_ART_8 = "       '.--..--.'     ",
+                ASCII_ART_9 = "         `\"\"\"\"\"` ",
+                ASCII_CREDIT = "   ascii art by: jgs    ";
+
+        static String TITLE_USA = "UNITED STATES OF AMERICA",
+                TITLE_EAC = "EMPLOYMENT AUTHORIZATION CARD";
+        static String LABEL_SURNAME = "Surname", LABEL_GIVEN_NAME = "Given Name", LABEL_USCIS_NUM = "USCIS#",
+                LABEL_CATEGORY = "Category", LABEL_CARD_NUM = "Card#", LABEL_BIRTH_COUNTRY = "Country of Birth",
+                LABEL_TERMS_CONDITIONS = "Terms and Conditions", LABEL_BIRTH_DATE = "Date of Birth",
+                LABEL_SEX = "Sex", LABEL_VALID_DATE = "Valid From:", LABEL_EXPIRE_DATE = "Card Expires:",
+                LABEL_REENTRY_DISCLAIMER = "NOT VALID FOR REENTRY TO U.S."; 
     public static void main(String[] args)
     {
         //ascii art credit: http://www.oocities.org/spunk1111/bodypart.htm
@@ -52,9 +70,12 @@ public class Main
         //Strings to help clean up long printf's below
         uscisNum = String.format("%03d-%03d-%03d", uscisNum1, uscisNum2, uscisNum3);
         dateOfBirth = String.format("%02d %s %d", birthDay, birthMonth, birthYear);
-        validDate = String.format("%02d/%02d/%4d", validMonth, validDay, validYear);
-        expireDate = String.format("%02d/%02d/%4d", expireMonth, expireDay, expireYear);
+        //validDate = String.format("%02d/%02d/%4d", validMonth, validDay, validYear);
+        //expireDate = String.format("%02d/%02d/%4d", expireMonth, expireDay, expireYear);
+        validDate = Main.formatDate(validMonth, validDay, validYear);
+        expireDate = Main.formatDate(expireMonth, expireDay, expireYear);
 
+        
         String finishedCard = Main.formatCard(surname,givenName,category,cardNum,birthCountry,
                 termsAndConditions,sex,uscisNum,dateOfBirth,validDate,expireDate);
 
@@ -62,31 +83,20 @@ public class Main
 
         
         }
+
+        public static String formatDate(int month, int day, int year)
+        {
+
+        String formatDate = String.format("%02d/%02d/%4d", month, day, year);
+        return formatDate;                
+        }
         public static String formatCard (String surname, String givenName, String category,
          String cardNum, String birthCountry, String termsAndConditions,
           char sex, String uscisNum, String dateOfBirth, String validDate, String expireDate)
         {
-                final String ASCII_ART_0 = "    .----.    .----.  ",
-                ASCII_ART_1 = "   (  --  \\  /  --  )",
-                ASCII_ART_2 = "          |  |        ",
-                ASCII_ART_3 = "         _/  \\_      ",
-                ASCII_ART_4 = "        (_    _)      ",
-                ASCII_ART_5 = "     ,    `--`    ,   ",
-                ASCII_ART_6 = "     \\'-.______.-'/  ",
-                ASCII_ART_7 = "      \\          /   ",
-                ASCII_ART_8 = "       '.--..--.'     ",
-                ASCII_ART_9 = "         `\"\"\"\"\"` ",
-                ASCII_CREDIT = "   ascii art by: jgs    ";
+                
 
-        final String TITLE_USA = "UNITED STATES OF AMERICA",
-                TITLE_EAC = "EMPLOYMENT AUTHORIZATION CARD";
-        final String LABEL_SURNAME = "Surname", LABEL_GIVEN_NAME = "Given Name", LABEL_USCIS_NUM = "USCIS#",
-                LABEL_CATEGORY = "Category", LABEL_CARD_NUM = "Card#", LABEL_BIRTH_COUNTRY = "Country of Birth",
-                LABEL_TERMS_CONDITIONS = "Terms and Conditions", LABEL_BIRTH_DATE = "Date of Birth",
-                LABEL_SEX = "Sex", LABEL_VALID_DATE = "Valid From:", LABEL_EXPIRE_DATE = "Card Expires:",
-                LABEL_REENTRY_DISCLAIMER = "NOT VALID FOR REENTRY TO U.S.";
-
-                String fullCard = " ";
+                String fullCard = "";
         
                 fullCard += String.format("╔══════════════════════════════════════════════════════════════════════╗%n");
                 fullCard += String.format("║%35s%35s║%n", TITLE_USA, "");
