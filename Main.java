@@ -27,8 +27,6 @@ public class Main
     {
         //ascii art credit: http://www.oocities.org/spunk1111/bodypart.htm
         
-       
-
         //DECLARATION SECTION
         //complete fields
         String surname, givenName, category, cardNum, birthCountry, termsAndConditions;
@@ -43,59 +41,90 @@ public class Main
         String uscisNum, dateOfBirth, validDate, expireDate;
 
         //INITIALIZATION SECTION
-        surname = "CHAPETON-LAMAS";
-        givenName = "NERY";
-        uscisNum1 = 12;
+        //surname = "CHAPETON-LAMAS";
+        surname = UtilityBelt.readString("Enter surname:\n", 1,20);
+
+        //givenName = "NERY";
+        givenName = UtilityBelt.readString("Enter given name:\n", 1,15);
+
+        /*uscisNum1 = 12;
         uscisNum2 = 4;
         uscisNum3 = 789;
-        category = "C09";
-        cardNum = "SRC9876543210";
-        birthCountry = "Guatemala";
-        termsAndConditions = "None";
+        */
+        uscisNum1 = UtilityBelt.readInt("Enter uscis number: (3 digits at a time)\n", 0,999);
+        uscisNum2 = UtilityBelt.readInt("", 0,999);
+        uscisNum3 = UtilityBelt.readInt("", 0,999);
 
+        //category = "C09";
+        category = UtilityBelt.readString("Enter category:\n", 3,3);
+
+        //cardNum = "SRC9876543210";
+        cardNum = UtilityBelt.readString("Enter card number:\n", 13,13);
+
+        //birthCountry = "Guatemala";
+        birthCountry = UtilityBelt.readString("Where were you born?:\n", 1,30);
+
+        //termsAndConditions = "None";
+        termsAndConditions = UtilityBelt.readString("Any terms and conditions? (Put None):\n", 4, 5);
+
+        /* 
         birthDay = 1;
         birthMonth = "JAN";
         birthYear = 1970;
+        */
+        birthDay = UtilityBelt.readInt("What day where you born?\n",1,31);
+        birthMonth = UtilityBelt.readString("What month were you born? (Ex: January = JAN, Februrary = FEB)\n",
+                3,3 );
+        birthYear = UtilityBelt.readInt("What year were you born?\n",1000,9999);
 
-        sex = 'M'; //note single quotes
 
-        validMonth = 2;
-        validDay = 2;
-        validYear = 2020;
-
-        expireMonth = 2;
-        expireDay = 2;
-        expireYear = 2022;
+        //sex = 'M'; //note single quotes
+        sex = UtilityBelt.readChar("Male (M), or Female(F)?:\n", "MF");
+        
+        //validMonth = 2;
+       // validDay = 2;
+        //validYear = 2020;
+        validMonth = UtilityBelt.readInt("When is this card valid until? (Month)\n", 1, 12);
+        validDay = UtilityBelt.readInt("(Day)", 1, 31);
+        validYear = UtilityBelt.readInt("(Year)", 1000, 9999); 
+        
+        
+        //expireMonth = 2;
+        //expireDay = 2;
+        //expireYear = 2022;
+        expireMonth = UtilityBelt.readInt("When does this card expire? (Month)\n", 1, 12);
+        expireDay = UtilityBelt.readInt("(Day)", 1, 31);
+        expireYear = UtilityBelt.readInt("(Year)", 1000, 9999);
 
         //Strings to help clean up long printf's below
         uscisNum = String.format("%03d-%03d-%03d", uscisNum1, uscisNum2, uscisNum3);
         dateOfBirth = String.format("%02d %s %d", birthDay, birthMonth, birthYear);
         //validDate = String.format("%02d/%02d/%4d", validMonth, validDay, validYear);
         //expireDate = String.format("%02d/%02d/%4d", expireMonth, expireDay, expireYear);
+
+
         validDate = Main.formatDate(validMonth, validDay, validYear);
         expireDate = Main.formatDate(expireMonth, expireDay, expireYear);
 
-        
+
         String finishedCard = Main.formatCard(surname,givenName,category,cardNum,birthCountry,
                 termsAndConditions,sex,uscisNum,dateOfBirth,validDate,expireDate);
 
         System.out.println(finishedCard);
-
-        
         }
+
 
         public static String formatDate(int month, int day, int year)
         {
-
         String formatDate = String.format("%02d/%02d/%4d", month, day, year);
         return formatDate;                
         }
+
+
         public static String formatCard (String surname, String givenName, String category,
          String cardNum, String birthCountry, String termsAndConditions,
           char sex, String uscisNum, String dateOfBirth, String validDate, String expireDate)
         {
-                
-
                 String fullCard = "";
         
                 fullCard += String.format("╔══════════════════════════════════════════════════════════════════════╗%n");
@@ -116,7 +145,7 @@ public class Main
                 fullCard += String.format("║%-25s%-15s%-30s║%n", "", LABEL_VALID_DATE, validDate);
                 fullCard += String.format("║%-25s%-15s%-30s║%n", "", LABEL_EXPIRE_DATE, expireDate);
                 fullCard += String.format("║%-25s%-45s║%n", ASCII_CREDIT, LABEL_REENTRY_DISCLAIMER);
-                fullCard += String.format("╚══════════════════════════════════════════════════════════════════════╝%n");
+                fullCard += String.format("╚══════════════════════════════════════════════════════════════════════╝");
 
                 return fullCard;
                 }
